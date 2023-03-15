@@ -1,0 +1,46 @@
+<form method="post"
+      enctype="multipart/form-data"
+      {% if action_url %} action="{% url action_url %}" {% endif %}>
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.text.label_tag }}
+        <textarea name="text" class="form-control" id="id_text" rows="3">{% if form.text.value %}{{ form.text.value }}{% endif %}</textarea>
+        {% if form.text.errors %}
+            {% for error in form.text.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
+        {% endif %}
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form.deadline_date.label_tag }}
+            <input name="deadline_date"
+                   type="date"
+                   class="form-control"
+                   id="id_deadline_date"
+                   value="{% if form.deadline_date.value %}{{ form.deadline_date.value }}{% endif %}">
+            {% if form.deadline_date.errors %}
+                {% for error in form.deadline_date.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
+            {% endif %}
+        </div>
+        <div class="form-group custom-file col-md-6">
+            {{ form.image.label_tag }}
+            <input name="image"
+                   type="file"
+                   class="form-control custom-file-input"
+                   id="id_image"
+                   value="{% if form.deadline_date.value %}{{ form.deadline_date.value }}{% endif %}">
+            {% if form.image.errors %}
+                {% for error in form.image.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-check">
+            {{form.completed.label_tag}}
+            {{form.completed}}
+            {% if form.completed.errors %}
+                {% for error in form.completed.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

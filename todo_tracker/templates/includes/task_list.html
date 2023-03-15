@@ -1,0 +1,15 @@
+{% for task in tasks %}
+    <article>
+        <ul>
+            <li>
+                Автор: {{ task.created_by.username }}
+            </li>
+            <li>Дата создания: {{ task.create_date|date:"d E Y" }}</li>
+            <li>Дата дедлайна: {{ task.deadline_date|date:"d E Y" }}</li>
+        </ul>
+        <p>{{ task.text }}</p>
+        <p>{% if task.completed %}Завершено{% else %}Не завершено{% endif %}</p>
+
+    </article>
+    {% if not forloop.last %}<hr/>{% endif %}
+{% endfor %}
