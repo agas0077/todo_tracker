@@ -18,7 +18,7 @@ def index(req: HttpRequest) -> HttpResponse:
     return render(req, template, context)
 
 
-
+@login_required
 def create_task(req: HttpRequest) -> HttpResponse:
     form = TaskForm(req.POST or None, files=req.FILES or None)
 
@@ -29,7 +29,7 @@ def create_task(req: HttpRequest) -> HttpResponse:
         'action_url': 'todo:create_task'
     }
 
-    if not req.method == 'POST' or not form.is_valid(): 
+    if not req.method == 'POST' or not form.is_valid():
         return render(req, template, context)
 
     task = form.save(commit=False)

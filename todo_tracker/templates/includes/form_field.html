@@ -1,0 +1,11 @@
+<div class="form-outline mb-4">
+    {{ field.label_tag }}
+    {% if rows %}
+        <textarea name={{ name }} id={{ id }} class="form-control" rows={% if rows %}{{ rows }}{% else %}1{% endif %}>{% if value %}{{ value }}{% endif %}</textarea>
+    {% elif type == 'file' %}
+        <input name={{ name }} type="file" class="form-control custom-file-input" id={{ id }} value="{% if value %}{{ value }}{% endif %}" />
+    {% else %}
+        <input name={{ name }} type={{ type }} id={{ id }} class="form-control" value="{% if value %}{{ value }}{% endif %}" />
+    {% endif %}
+    {% include "includes/error.html" with field=field %}
+</div>

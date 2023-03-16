@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  Выход из системы
+{% endblock title %}
+{% block content %}
+  <div class="d-flex flex-column align-items-center">
+    <div class="col-4">{% include "includes/error.html" with field=form.non_field_errors type="global" %}</div>
+    <form method="post"
+          class="col-4"
+          {% if action_url %} action="{% url action_url %}" {% endif %}>
+      {% csrf_token %}
+      <div class="row row-cols-1">
+        {% include "includes/form_field.html" with name="username" type="text" id="id_username" field=form.username value=form.username.value %}
+        {% include "includes/form_field.html" with name="password" type="password" id="id_password" field=form.password value=form.password.value %}
+      </div>
+      <button type="submit" class="btn btn-primary btn-block mb-4 col-12">Войти</button>
+      <div class="text-center">
+        <p>
+          Нет аккаунта? <a href={% url 'users:signup' %}>Регистрация</a>
+        </p>
+      </div>
+    </form>
+  </div>
+{% endblock content %}

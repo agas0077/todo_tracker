@@ -1,21 +1,40 @@
-<div class="container">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a href={% url 'todo:index' %} class="nav-link active" aria-current="page">Все задачи</a>
-            </li>
-            <li class="nav-item">
-                <a href={% url 'todo:create_task' %} class="nav-link">Создать задачу</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">FAQs</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">About</a>
-            </li>
-        </ul>
-    </header>
-</div>
+{% url 'todo:index' as index_url %}
+{% url 'todo:create_task' as create_task_url %}
+{% url 'users:login' as login_url %}
+{% url 'users:logout' as logout_url %}
+{% url 'users:signup' as signup_url %}
+{% with request.path as current_url %}
+    <div class="container">
+        <header class="d-flex justify-content-between mb-4 py-3 border-bottom">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href={{ index_url }} class="nav-link {% if current_url == index_url %}active{% endif %}" aria-current="page">Все задачи</a>
+                </li>
+                <li class="nav-item">
+                    <a href={{ create_task_url }} class="nav-link {% if current_url == create_task_url %}active{% endif %}">Создать задачу</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href={{ logout_url }} class="nav-link bg-secondary text-light">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href={{ login_url }} class="nav-link {% if current_url == login_url %}active{% endif %}">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href={{ signup_url }} class="nav-link {% if current_url == signup_url %}active{% endif %}">Регистрация</a>
+                    </li>
+                {% endif %}
+
+                {% comment %} <li class="nav-item">
+                    <a href="#" class="nav-link">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li> {% endcomment %}
+            </ul>
+        </header>
+    </div>
+{% endwith %}

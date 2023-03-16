@@ -1,46 +1,23 @@
-<form method="post"
-      enctype="multipart/form-data"
-      {% if action_url %} action="{% url action_url %}" {% endif %}>
-    {% csrf_token %}
-    <div class="form-group">
-        {{ form.text.label_tag }}
-        <textarea name="text" class="form-control" id="id_text" rows="3">{% if form.text.value %}{{ form.text.value }}{% endif %}</textarea>
-        {% if form.text.errors %}
-            {% for error in form.text.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
-        {% endif %}
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form.deadline_date.label_tag }}
-            <input name="deadline_date"
-                   type="date"
-                   class="form-control"
-                   id="id_deadline_date"
-                   value="{% if form.deadline_date.value %}{{ form.deadline_date.value }}{% endif %}">
-            {% if form.deadline_date.errors %}
-                {% for error in form.deadline_date.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
-            {% endif %}
+<div class="d-flex justify-content-center">
+    <form method="post"
+          enctype="multipart/form-data"
+          class="col-8"
+          {% if action_url %} action="{% url action_url %}" {% endif %}>
+        {% csrf_token %}
+        <div class="form-group">
+            {% include 'includes/form_field.html' with name="text" type="text" id="id_text" field=form.text value=form.text.value rows=3 %}
         </div>
-        <div class="form-group custom-file col-md-6">
-            {{ form.image.label_tag }}
-            <input name="image"
-                   type="file"
-                   class="form-control custom-file-input"
-                   id="id_image"
-                   value="{% if form.deadline_date.value %}{{ form.deadline_date.value }}{% endif %}">
-            {% if form.image.errors %}
-                {% for error in form.image.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
-            {% endif %}
+        <div class="form-row">
+            {% include 'includes/form_field.html' with name="deadline_date" type="date" id="id_deadline_date" field=form.deadline_date value=form.deadline_date.value %}
+            {% include 'includes/form_field.html' with name="image" type="file" id="id_text" field=form.image value=form.image.value %}
         </div>
-    </div>
-    <div class="form-group">
-        <div class="form-check">
-            {{form.completed.label_tag}}
-            {{form.completed}}
-            {% if form.completed.errors %}
-                {% for error in form.completed.errors %}<div class="alert alert-danger">{{ error|escape }}</div>{% endfor %}
-            {% endif %}
+        <div class="form-group">
+            <div class="form-check">
+                {{ form.completed.label_tag }}
+                {{ form.completed }}
+                {% include 'includes/error.html' with field=form.completed %}
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
+        <button type="submit" class="mt-4 btn btn-primary">Сохранить</button>
+    </form>
+</div>

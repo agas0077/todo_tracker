@@ -15,4 +15,5 @@ class TaskAdmin(admin.ModelAdmin):
     )
     empty_value_display = '-пусто-'
 
+
 admin.site.register(Task, TaskAdmin)

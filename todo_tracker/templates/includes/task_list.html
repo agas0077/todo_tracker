@@ -1,15 +1,17 @@
-{% for task in tasks %}
-    <article>
-        <ul>
-            <li>
-                Автор: {{ task.created_by.username }}
-            </li>
-            <li>Дата создания: {{ task.create_date|date:"d E Y" }}</li>
-            <li>Дата дедлайна: {{ task.deadline_date|date:"d E Y" }}</li>
-        </ul>
-        <p>{{ task.text }}</p>
-        <p>{% if task.completed %}Завершено{% else %}Не завершено{% endif %}</p>
-
-    </article>
-    {% if not forloop.last %}<hr/>{% endif %}
-{% endfor %}
+<div class="d-inline-flex flex-wrap justify-content-center">
+    {% for task in tasks %}
+        <div class="card text-white {% if task.completed %}bg-success{% else %}bg-danger{% endif %} m-1 col-3">
+            <div class="card-header">Задача {{ task.pk }}</div>
+            <div class="card-body">
+                <h5 class="card-title">Primary card title</h5>
+                <p class="card-text">{{ task.text }}</p>
+                <ul class="list-group">
+                    <li class="list-group-item">Автор: {{ task.created_by.username }}</li>
+                    <li class="list-group-item">Дата создания: {{ task.create_date|date:"d E Y" }}</li>
+                    <li class="list-group-item">Дата дедлайна: {{ task.deadline_date|date:"d E Y" }}</li>
+                </ul>
+            </div>
+        </div>
+        {% if not forloop.last %}<hr/>{% endif %}
+    {% endfor %}
+</div>

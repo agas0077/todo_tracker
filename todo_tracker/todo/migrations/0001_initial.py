@@ -17,12 +17,33 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Task',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('task', models.TextField(verbose_name='Задание')),
-                ('create_date', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
-                ('deadline_date', models.DateTimeField(verbose_name='Дата дедлайна')),
-                ('image', models.ImageField(blank=True, null=True, upload_to='todo/', verbose_name='Картинка')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tasks', to=settings.AUTH_USER_MODEL)),
+                ('id',
+                 models.BigAutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('task',
+                 models.TextField(
+                     verbose_name='Задание')),
+                ('create_date',
+                 models.DateTimeField(
+                     auto_now_add=True,
+                     verbose_name='Дата создания')),
+                ('deadline_date',
+                 models.DateTimeField(
+                     verbose_name='Дата дедлайна')),
+                ('image',
+                 models.ImageField(
+                     blank=True,
+                     null=True,
+                     upload_to='todo/',
+                     verbose_name='Картинка')),
+                ('created_by',
+                 models.ForeignKey(
+                     on_delete=django.db.models.deletion.CASCADE,
+                     related_name='tasks',
+                     to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

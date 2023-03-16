@@ -6,6 +6,7 @@ from django.db import models
 
 User = get_user_model()
 
+
 class Task(models.Model):
     text = models.TextField('Задание')
     create_date = models.DateTimeField('Дата создания', auto_now_add=True)
