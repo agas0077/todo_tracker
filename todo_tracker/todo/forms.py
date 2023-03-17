@@ -1,3 +1,5 @@
+import datetime as dt
+
 from django import forms
 
 from todo.models import Task
@@ -19,5 +21,11 @@ class TaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ('text', 'deadline_date', 'completed', 'image', )
+        fields = ('title', 'text', 'deadline_date', 'completed', 'image', )
         error_messages = dict.fromkeys(fields, my_default_errors)
+
+    def clean_deadline_date(self):
+        data = self.cleaned_data['deadline_date']
+        if data.date() < dt.datetime.now().date():
+            raise forms.ValidationError('Дата дедлайна не может быть в прошлом.')
+        return data
