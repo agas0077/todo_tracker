@@ -18,14 +18,19 @@ class TaskForm(forms.ModelForm):
         required=False,
         label='Завершено',
         label_suffix='')
-
+    
     class Meta:
         model = Task
-        fields = ('title', 'text', 'deadline_date', 'completed', 'image', )
+        fields = ('title', 'text', 'deadline_date',
+                  'completed', 'image', 'priority',
+                  'group',)
         error_messages = dict.fromkeys(fields, my_default_errors)
 
     def clean_deadline_date(self):
-        data = self.cleaned_data['deadline_date']
-        if data.date() < dt.datetime.now().date():
-            raise forms.ValidationError('Дата дедлайна не может быть в прошлом.')
+        data = self.cleaned_data['deadline_date'].date()
+        if data < dt.datetime.now().date():
+            raise forms.ValidationError(
+                'Дата дедлайна не может быть в прошлом.')
+        if isinstance(data, str):
+            data = dt.datetime.strptime(data, '%Y-%m-%d')
         return data

@@ -11,7 +11,7 @@
         {% endthumbnail %}
         <p class="card-text">{{ task.text }}</p>
         <ul class="list-group">
-            <li class="list-group-item">Автор: {{ task.created_by.username }}</li>
+            <li class="list-group-item">Приоритет: {{ task.get_priority_display }}</li>
             <li class="list-group-item">Дата создания: {{ task.create_date|date:"d E Y" }}</li>
             <li class="list-group-item">Дата дедлайна: {{ task.deadline_date|date:"d E Y" }}</li>
         </ul>

@@ -1,0 +1,15 @@
+    <div class="col-3">
+        <label for="id_{{ select_name }}" class="form-label ps-1 fw-bold">{{ label_text }}</label>
+        <select class="col-1 form-select"
+                aria-label="Default select"
+                id="id_{{ select_name }}"
+                name="{{ select_name }}"
+                onchange="this.form.submit()">
+            {{ ordering }}
+            {% for option, name in options %}
+                <option value="{{ option }}" {% if option == current_state %}selected{% endif %}>
+                    {{ name }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
