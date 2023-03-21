@@ -3,12 +3,8 @@ import datetime as dt
 from django import forms
 
 from todo.models import Task
-
-my_default_errors = {
-    'required': 'Это обязательное поле!',
-    'invalid': 'Ввдеите правильное значение!'
-}
-
+from error_messages.DefaultFromErrors import DEFAULT_ERRORS
+from error_messages.ValidationErrors import DEADLINE_ERROR
 
 class TaskForm(forms.ModelForm):
     completed = forms.BooleanField(
@@ -24,13 +20,12 @@ class TaskForm(forms.ModelForm):
         fields = ('title', 'text', 'deadline_date',
                   'completed', 'image', 'priority',
                   'group',)
-        error_messages = dict.fromkeys(fields, my_default_errors)
+        error_messages = dict.fromkeys(fields, DEFAULT_ERRORS)
 
     def clean_deadline_date(self):
         data = self.cleaned_data['deadline_date'].date()
         if data < dt.datetime.now().date():
-            raise forms.ValidationError(
-                'Дата дедлайна не может быть в прошлом.')
+            raise forms.ValidationError(DEADLINE_ERROR)
         if isinstance(data, str):
             data = dt.datetime.strptime(data, '%Y-%m-%d')
         return data

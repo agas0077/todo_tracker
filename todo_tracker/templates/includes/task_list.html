@@ -1,25 +1,14 @@
-    {% comment %} <div class="d-flex"> {% endcomment %}
-        <form method="get" action="{% url action_url %}" class="d-flex justify-content-between mb-4">
-            {% comment %} <div class="d-flex flex-column">
-        <label for="id_sort" class="form-label ps-1 fw-bold">Сортировка:</label>
-        <form method="get" action="{% url action_url %}" class="mb-4">
-            <select class="col-1 form-select" aria-label="Default select" id="id_sort" name="sort" onchange="this.form.submit()">
-                {% for sort_type, name in sorting_options %}
-                    <option value="{{ sort_type }}">
-                        {{ name }}
-                    </option>
-                {% endfor %}
-            </select>
-        </form>
-            </div> {% endcomment %}
-            {% for option in options.values %}
-                {% include 'includes/select_dropdown.html' with select_name=option.name label_text=option.label_text options=option.options current_state=option.current_state %}
-            {% endfor %}
-        </form>
-    {% comment %} </div> {% endcomment %}
+<form method="get"
+      action="{% url action_url %}"
+      class="d-flex justify-content-between mb-4">
+    {% for option in options.values %}
+        {% include 'includes/select_dropdown.html' with select_name=option.name label_text=option.label_text options=option.options current_state=option.current_state %}
+    {% endfor %}
+</form>
 <div class="row row-cols-1 row-cols-md-4 g-3">
     {% if not object_list %}Задач пока нет({% endif %}
-    {% for task in object_list %}
+    {% for task in page_obj %}
         {% include 'includes/task_card.html' %}
     {% endfor %}
 </div>
+{% include 'includes/paginator.html' %}

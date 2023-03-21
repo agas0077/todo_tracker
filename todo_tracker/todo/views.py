@@ -45,6 +45,7 @@ def get_success_quote():
 class IndexView(ListView):
     template_name = 'todo/index.html'
     model = Task
+    paginate_by = 4
     SORTING_OPTIONS = (
         ('deadline_date', 'Дедлайн - по возрастанию'),
         ('-deadline_date', 'Дедлайн - по убыванию'),
@@ -101,6 +102,11 @@ class IndexView(ListView):
             },
         }
         context['action_url'] = 'todo:index'
+        if self.request.method == 'GET':
+            GET_params = self.request.GET.copy()
+            if 'page' in GET_params:
+                del GET_params['page']
+            context['GET_params'] = GET_params
         return context
 
 
