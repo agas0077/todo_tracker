@@ -6,6 +6,7 @@ from todo.models import Task
 from error_messages.DefaultFromErrors import DEFAULT_ERRORS
 from error_messages.ValidationErrors import DEADLINE_ERROR
 
+
 class TaskForm(forms.ModelForm):
     completed = forms.BooleanField(
         widget=forms.CheckboxInput(
@@ -14,7 +15,7 @@ class TaskForm(forms.ModelForm):
         required=False,
         label='Завершено',
         label_suffix='')
-    
+
     class Meta:
         model = Task
         fields = ('title', 'text', 'deadline_date',
