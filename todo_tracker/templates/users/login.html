@@ -12,7 +12,7 @@
       <div class="animation__eye animation__eye--two-one"></div>
       <div class="animation__eye animation__eye--two-two"></div>
       <video class="animation__video" width="384" height="374" loop muted autoplay>
-        <source src="{% static 'video/watchers.mp4' %}" type="video/mp4">
+        <source src="{% static 'video/watchers.mp4' %}" type="video/mp4"/>
       </video>
     </div>
     <form method="post"
@@ -31,11 +31,9 @@
       </div>
     </form>
     <p class="about">
-      * использован фрагмент <a href="http://vasya-lozhkin.ru/pictures/rodina-slyshit/">картины Васи Ложкина</a>
+      * использован фрагмент <a href="https://vasya-lozhkin.ru/pictures/rodina-slyshit/">картины Васи Ложкина</a>
     </p>
   </div>
   <script src="{% static 'js/login.js'%}"></script>
-  <link href="{% static 'css/login.css' %}" rel="stylesheet">
-</body>
-</html>
+  <link href="{% static 'css/login.css' %}" rel="stylesheet"/>
 {% endblock content %}
