@@ -46,7 +46,6 @@
 $ python manage.py createsuperuser --username admin@email.com --email admin@email.com
 ```
 
-## :sleeping: REST API
+## :sleeping: REST API Docs
 
-Полный REST API, пригодится когда буду заниматься выделенным фронтом. Для доступа к некоторым разделам API нужны права администратора.
 API swagger:  ```http://.../swagger``` 
