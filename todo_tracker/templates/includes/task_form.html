@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center">
+    <form method="post"
+          enctype="multipart/form-data"
+          class="col-8"
+          {% if action_url %} action="{% url action_url.url action_url.param %}" {% endif %}>
+        {% csrf_token %}
+        <div class="form-group">
+            {% include 'includes/form_field.html' with name="title" type="title" id="id_title" field=form.title value=form.title.value %} 
+            {% include 'includes/form_field.html' with name="text" type="text" id="id_text" field=form.text value=form.text.value rows=3 %}
+        </div>
+        <div class="form-row">
+            {% include 'includes/form_field.html' with name="deadline_date" type="date" id="id_deadline_date" field=form.deadline_date value=form.deadline_date.value|date:"Y-m-d" %}
+            {% include 'includes/form_field.html' with name="image" type="file" id="id_image" field=form.image value=form.image.value %}
+            {% include 'includes/form_field.html' with name="priority" type="select" id="id_priority" field=form.fields.priority value=form.priority.value %}
+            {% include 'includes/form_field.html' with name="group" type="select" id="id_group" field=form.fields.group value=form.group.value %}
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                {{ form.completed.label_tag }}
+                {{ form.completed }}
+                {% include 'includes/error.html' with field=form.completed %}
+            </div>
+        </div>
+        <button type="submit" class="mt-4 btn btn-primary">Сохранить</button>
+        {% if is_edit %}
+            <button type="submit" class="mt-4 btn btn-danger" formaction={% url 'todo:delete_task' task_id %}>Удалить</button>
+        {% endif %}
+    </form>
+</div>
