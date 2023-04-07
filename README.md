@@ -8,6 +8,7 @@
 - Python 3.10 (Django, Django REST framework, Simple-JWT, djoser, drf-yasg)
 - HTML5, Bootstrap 5, JS, CSS
 - mySQL
+- Ninja API
 
 ## :package: [Зависимости проекта](https://github.com/agas0077/todo_tracker/blob/master/requirements.txt)
 
