@@ -48,8 +48,6 @@ class IndexView(ListView):
     SORTING_OPTIONS = (
         ('deadline_date', 'Дедлайн - по возрастанию'),
         ('-deadline_date', 'Дедлайн - по убыванию'),
-        ('priority', 'Приоритет - по возрастанию'),
-        ('-priority', 'Приоритет - по убыванию'),
         ('create_date', 'Дата создания - по возрастанию'),
         ('-create_date', 'Дата создания - по убыванию'),
         ('title', 'Заголовок'),

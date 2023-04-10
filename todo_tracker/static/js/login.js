@@ -35,7 +35,6 @@
         animation.style.maxHeight = '374px';
         animationVideo.style.display = 'block';
         fadeIn(animationVideo, 2000);
-        about.style.display = 'inline';
         fadeIn(about, 2000);
         animationVideo.play();
 
@@ -154,7 +153,7 @@
 
     function clickHandler() {
         var wrapper = document.querySelector('.wrapper');
-        inputPassword.type = 'password';
+        inputPassword.type = 'text';
         fadeOut(wrapper, 1000);
     }
 

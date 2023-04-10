@@ -1,4 +1,3 @@
-{% load static %}
 {% url 'todo:index' as index_url %}
 {% url 'todo:create_task' as create_task_url %}
 {% url 'users:login' as login_url %}
@@ -6,16 +5,7 @@
 {% url 'users:signup' as signup_url %}
 {% with request.path as current_url %}
     <div class="container">
-        <header class="d-flex 
-                       justify-content-between 
-                       align-items-center 
-                       mb-4 
-                       py-3 
-                       border-bottom">
-            <img style="object-fit:scale-down;
-                        width:75px;
-                        height:auto;" 
-                 src={% static 'images/logo.jpg' %}/>
+        <header class="d-flex justify-content-between mb-4 py-3 border-bottom">
             <ul class="nav nav-pills">
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
@@ -39,6 +29,12 @@
                         <a href={{ signup_url }} class="nav-link {% if current_url == signup_url %}active{% endif %}">Регистрация</a>
                     </li>
                 {% endif %}
+                {% comment %} <li class="nav-item">
+                    <a href="#" class="nav-link">FAQs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li> {% endcomment %}
             </ul>
         </header>
     </div>
