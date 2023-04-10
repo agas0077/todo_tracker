@@ -4,14 +4,13 @@ import os
 import shutil
 import random
 
-
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 
 from todo_tracker.settings import BASE_DIR, MEDIA_ROOT, Path
 from todo.models import Task
-DATE_FORMAT = 'YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ]'
+
 DATE_FORMAT = r'%d.%m.%Y'
 User = get_user_model()
 
@@ -78,23 +77,29 @@ class Command(BaseCommand):
     def images_load(self):
         img_to_load = Path(BASE_DIR, 'static', 'test_data', 'images')
         items = list(Task.objects.all())
-        # if you want only a single random item
-        random_item = random.choice(items)
-        random_items = random.sample(items, int(len(items)) // 3)
 
-        count = 0
         all_image_paths = []
+
+        save_to_path = os.path.join(MEDIA_ROOT, 'todo')
+        if not os.path.exists(save_to_path):
+            os.mkdir(save_to_path)
+
         for file in os.listdir(img_to_load):
             from_path = os.path.join(img_to_load, file)
-            to_path = os.path.join(MEDIA_ROOT, 'todo', f'{random.randint(0, 19999999)}.jpg')
+
+            to_path = os.path.join(save_to_path,
+                                   f'{random.getrandbits(128)}.jpg')
+
             shutil.copy2(from_path, to_path)
             all_image_paths.append(to_path)
-            count += 1
-        print(all_image_paths)
-        for task in items:
-            path = random.choice(all_image_paths)
-            task.image = os.path.join(*path.split('\\')[-2:])
-            task.save()
 
-        
+        count = 0
+        for task in items:
+            add_image = random.choice([True, False])
+            if add_image:
+                path = random.choice(all_image_paths)
+                task.image = os.path.join(*path.split('\\')[-2:])
+                task.save()
+                count += 1
+
         return f'Загрузка {count} картинок'
