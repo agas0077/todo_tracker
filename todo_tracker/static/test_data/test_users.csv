@@ -1,0 +1,4 @@
+﻿password;id;username;last_name;email;first_name
+qwerty123456;1;test_user1;test_user1;test_user1@test.ru;test_user1
+qwerty123456;2;test_user2;test_user2;test_user2@test.ru;test_user2
+qwerty123456;3;test_user3;test_user3;test_user3@test.ru;test_user3
