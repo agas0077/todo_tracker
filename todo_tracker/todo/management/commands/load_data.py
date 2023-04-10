@@ -77,7 +77,6 @@ class Command(BaseCommand):
     def images_load(self):
         img_to_load = Path(BASE_DIR, 'static', 'test_data', 'images')
         items = list(Task.objects.all())
-        # if you want only a single random item
 
         all_image_paths = []
 
