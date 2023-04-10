@@ -79,22 +79,29 @@ class Command(BaseCommand):
         img_to_load = Path(BASE_DIR, 'static', 'test_data', 'images')
         items = list(Task.objects.all())
         # if you want only a single random item
-        random_item = random.choice(items)
-        random_items = random.sample(items, int(len(items)) // 3)
 
         count = 0
         all_image_paths = []
+
+        save_to_path = os.path.join(MEDIA_ROOT, 'todo')
+        if not os.path.exists(save_to_path):
+            os.mkdir(save_to_path)
+
         for file in os.listdir(img_to_load):
             from_path = os.path.join(img_to_load, file)
-            to_path = os.path.join(MEDIA_ROOT, 'todo', f'{random.randint(0, 19999999)}.jpg')
+
+            to_path = os.path.join(save_to_path, f'{random.randint(0, 19999999)}.jpg')
+
             shutil.copy2(from_path, to_path)
             all_image_paths.append(to_path)
             count += 1
-        print(all_image_paths)
+        
         for task in items:
-            path = random.choice(all_image_paths)
-            task.image = os.path.join(*path.split('\\')[-2:])
-            task.save()
+            add_image = random.choice([True, False])
+            if add_image:
+                path = random.choice(all_image_paths)
+                task.image = os.path.join(*path.split('\\')[-2:])
+                task.save()
 
         
         return f'Загрузка {count} картинок'
