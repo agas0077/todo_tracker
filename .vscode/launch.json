@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}\\todo_tracker\\manage.py",
             "args": [
-                "runserver"
+                "load_data"
             ],
             "django": true,
             "justMyCode": false
