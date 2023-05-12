@@ -82,7 +82,7 @@ class Command(BaseCommand):
 
         save_to_path = os.path.join(MEDIA_ROOT, 'todo')
         if not os.path.exists(save_to_path):
-            os.mkdir(save_to_path)
+            os.makedirs(save_to_path, exist_ok=True)
 
         for file in os.listdir(img_to_load):
             from_path = os.path.join(img_to_load, file)
