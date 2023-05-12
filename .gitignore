@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 media
+staticfiles
 # .vscode
