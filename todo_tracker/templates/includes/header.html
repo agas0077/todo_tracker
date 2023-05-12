@@ -12,10 +12,6 @@
                        mb-4 
                        py-3 
                        border-bottom">
-            {% with STAT images/logo.jpg %} as  %}{% endwith %}
-            {% thumbnail task.image "100x50" crop="center" upscale=False quality=100 as im %}
-                <img class="card-img my-2" src="{{ im.url }}"/>
-            {% endthumbnail %}
             <img style="object-fit:scale-down;
                         width:75px;
                         height:auto;" 
