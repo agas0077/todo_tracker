@@ -34,6 +34,9 @@ ALLOWED_HOSTS = ['todo-tracker.andrey-agas-portfolio.website',
                  'www.todo-tracker.andrey-agas-portfolio.website',
                  'localhost']
 
+CSRF_TRUSTED_ORIGINS = ['https://*.andrey-agas-portfolio.website',
+                        'https://*.127.0.0.1']
+
 
 # Application definition
 
