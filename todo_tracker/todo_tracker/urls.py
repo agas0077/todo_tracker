@@ -1,18 +1,18 @@
-from django.contrib import admin
-from django.urls import path, include, re_path
+# Third Party Library
 from django.conf import settings
 from django.conf.urls.static import static
-from drf_yasg.views import get_schema_view
+from django.contrib import admin
+from django.urls import include, path, re_path
 from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('auth/', include('users.urls', namespace='users')),
-    path('auth/', include('django.contrib.auth.urls')),
-    path('api/', include('api.urls', namespace='api')),
-    path('', include('todo.urls', namespace='todo')),
+    path("admin/", admin.site.urls),
+    path("auth/", include("users.urls", namespace="users")),
+    path("auth/", include("django.contrib.auth.urls")),
+    path("api/", include("api.urls", namespace="api")),
+    path("", include("todo.urls", namespace="todo")),
 ]
 
 if settings.DEBUG:
@@ -23,7 +23,7 @@ if settings.DEBUG:
 schema_view = get_schema_view(
     openapi.Info(
         title="TodoTracker API",
-        default_version='v1',
+        default_version="v1",
         description="Документация для API проекта TodoTracker",
         contact=openapi.Contact(email="at-dt@yandex.ru"),
         license=openapi.License(name="MIT License"),
@@ -33,10 +33,19 @@ schema_view = get_schema_view(
 )
 
 urlpatterns += [
-    re_path(r'swagger(?P<format>\.json|\.yaml)/',
-            schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    path(r'swagger/', schema_view.with_ui('swagger', cache_timeout=0),
-         name='schema-swagger-ui'),
-    path(r'redoc/', schema_view.with_ui('redoc', cache_timeout=0),
-         name='schema-redoc'),
+    re_path(
+        r"swagger(?P<format>\.json|\.yaml)/",
+        schema_view.without_ui(cache_timeout=0),
+        name="schema-json",
+    ),
+    path(
+        r"swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
+    ),
+    path(
+        r"redoc/",
+        schema_view.with_ui("redoc", cache_timeout=0),
+        name="schema-redoc",
+    ),
 ]

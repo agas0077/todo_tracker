@@ -1,6 +1,6 @@
-from rest_framework.viewsets import ModelViewSet
-
+# Third Party Library
 from api import serializers
+from rest_framework.viewsets import ModelViewSet
 from todo.models import Task
 
 

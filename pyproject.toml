@@ -1,0 +1,9 @@
+[tool.black]
+line-length = 79
+include = 'todo_tracker/.*.py'
+extend-exclude = '''
+(
+    migrations/* |
+    static/*
+)
+'''
